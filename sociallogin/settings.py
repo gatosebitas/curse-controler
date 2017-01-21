@@ -117,6 +117,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# MAILING
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
