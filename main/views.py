@@ -4,7 +4,6 @@ from .models import Person, SessionAccount
 from django.contrib.auth import login, logout
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from toctochi_stereo import pprint
 
 
 def home(req):
