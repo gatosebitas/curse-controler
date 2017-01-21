@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Facebook Login JavaScript Example</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+</head>
+<body>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  window.fbAsyncInit = function() {
+    console.log('init')
+    FB.init({
+      appId      : '1690412444582243',
+      cookie     : false,  // enable cookies to allow the server to access 
+                          // the session
+      xfbml      : true,  // parse social plugins on this page
+      version    : 'v2.8' // use graph api version 2.8
+    });
+    FB.getLoginStatus(function(response) {
+        statusHandler(response);
+    });
+  };
+
+</script>
+
+
+<header>
+  <img id="main-picture" class="hide" src="#">
+  {% if user.is_authenticated %}
+  <div id="main-username" class="">{{user}}</div>
+  {% endif %}
+  <div class="fb-login-button" scope="email" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" onlogin="onLoggedIn();"></div>
+  {% if not user.is_authenticated %}
+    <div id="no-session-message">
+      Inice Sesion si desea usar la cuenta
+    </div>
+  {% endif %}
+</header>
+
+<section class="users inline-block">
+  <h4 class="txt-centered">Registrados</h4>
+  {% for u in users %}
+    <div class="user {% if not user.using_account and u.using_account %}warn{% elif user.using_account and u.using_account %}own{% endif %}">
+      <div class="inline-block">
+        <img src="{{u.picture}}">
+      </div>
+      <div class="inline-block name-block">
+      <label class="username">{{u.first_name}}</label><br>
+      <label class="username"><strong>{% if u.using_account %}usando...{% endif %}</strong></label>
+      </div>
+    </div>
+  {% endfor %}
+
+</section>
+<section class="actions-block inline-block txt-centered">
+  <section>
+    
+    <div class="using-msg {% if not session %}ok{% elif user.using_account %}own{% else %}warn{% endif %}">
+      <p class="{% if not session %}hide{% endif %}">
+        {% if user.using_account %}
+          Estas usando la cuenta 
+        {% else %}
+          La cuenta esta siendo usada 
+        {% endif %}
+        hasta la(s) <strong id="to_hour"></strong>
+      </p>
+
+      {% if user.is_authenticated %}
+        <form method="POST" id="main-form" name="main-form" class="{% if session %}hide{% endif %}">
+          <h2>Está libre!</h2>
+          Cuantos minutos usaras la cuenta? <br><br><input type="number" name="session-time" id="session-time" value="10" required>Minutos
+          <br><br>
+          <button type="submit" id="use-account-btn" class="btn">
+            Usar
+          </button>
+        </form>
+      {% elif not session %}
+        <h2>Está libre!</h2>
+      {% endif %}
+        <br>
+        <button id="update-btn" class="btn" onclick="window.location.reload();">
+          Actualizar
+        </button>
+      {% if user.using_account %}
+        <button id="end-session-btn" class="btn">
+          Dejar de usar
+        </button>
+      {% endif %}
+    </div>
+  </section>
+  <section style="text-align: left;">
+    <P><strong>POR QUE?</strong> Aveces es incomodo pedir permiso cada que vas a usar la plataforma de Platzi, asi que antes de preguntar ingresa aqui y ve si alguien esta usando la cuenta.</P>
+
+    Ventajas:
+    <ul>
+      <li>Se tiene claro a que hora podras usar a la plataforma</li>
+      <li>Evita el spam del chat de facebook</li>
+      <li>Las sesiones terminan automaticamente pasado el tiempo que se ingreso</li>
+    </ul>
+    <p><strong>NOTA IMPORTANTE:</strong> Las sesion se hace por facebook pero solo se usa sus nombres e email, asi que no se preocupen ;), para los devs del team, si desean mejorar esto les dejo el repo</p>
+  </section>
+</section>
+
+<script>
+  var personEmail = '{{user.email}}';
+  {% if session %}
+    var sessionId = {{session.pk}}
+  {% endif %}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.2/jquery.min.js"></script>
+<script src="{% static 'main/scripts.js' %}"></script>
+<script type="text/javascript">
+  {% if session %}
+      var remaining = {{session.remaining}};
+      var t = new Date();
+      t.setSeconds(t.getSeconds() + remaining);
+      $('#to_hour').html(t.toLocaleTimeString());
+  {% endif %}
+</script>
+</body>
+</html>
