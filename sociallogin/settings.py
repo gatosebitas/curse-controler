@@ -73,7 +73,7 @@ WSGI_APPLICATION = 'sociallogin.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-if not DEBUG:
+if not DEBUG or True:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
