@@ -103,11 +103,9 @@ function getBtnState(btn) {
         html: btn.html()
     }
 }
-function show_count(remaining){
-    var counter = $('#counter');
-    var from = 
+function trackRemaining(remaining){
     setInterval(function(){
-        counter.html(remaining);
+        console.log('remaining:', remaining)
         if (remaining === 0){
             window.location.reload();
         }

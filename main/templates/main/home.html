@@ -124,12 +124,13 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.2/jquery.min.js"></script>
 <script src="{% static 'main/scripts.js' %}"></script>
-<script type="text/javascript">
+<script>
   {% if session %}
       var remaining = {{session.remaining}};
       var t = new Date();
       t.setSeconds(t.getSeconds() + remaining);
       $('#to_hour').html(t.toLocaleTimeString());
+      trackRemaining(remaining);
   {% endif %}
 </script>
 </body>
