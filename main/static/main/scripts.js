@@ -43,18 +43,22 @@ $('#main-form').submit(function(ev){
 
 function statusHandler(resp) {
    if (resp.status === 'connected') {
+        if (!isAuthenticated) {
+            getUserFromFacebook();
+        }
         console.log('connected')
+    } else {
+        if (isAuthenticated) {
+            console.log('no connected')
+            endSesionOnServer();
+        }
     }
 }
 function onLoggedIn() {
     $('#no-session-message').html('Espere por favor...');
     FB.getLoginStatus(function(resp) {
         if (resp.status === 'connected') {
-            FB.api('/me', {fields: 'name,email,first_name,last_name,picture'},function(data) {
-                console.log('data:', data)
-                data.picture = data.picture.data.url;
-                startSesionOnServer(data);
-            });
+            getUserFromFacebook();
         } else {
            endSesionOnServer();
         }
@@ -109,4 +113,11 @@ function show_count(remaining){
         }
         remaining -= 1;
     }, 1000);
+}
+
+function getUserFromFacebook() {
+    FB.api('/me', {fields: 'name,email,first_name,last_name,picture'},function(data) {
+        data.picture = data.picture.data.url;
+        startSesionOnServer(data);
+    });
 }

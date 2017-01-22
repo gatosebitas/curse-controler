@@ -116,6 +116,8 @@
 
 <script>
   var personEmail = '{{user.email}}';
+  var isAuthenticated = {% if user.is_authenticated %}true{% else %}false{% endif %};
+  console.log('isAuthenticated:', isAuthenticated)
   {% if session %}
     var sessionId = {{session.pk}}
   {% endif %}
