@@ -26,7 +26,7 @@ SECRET_KEY = '%c819#e6!ihczdh)#$uz7oofgd2*z@o%n7^zsz(4)cetcd+bt9'
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-# ADMINS = [('Yoel', 'yoel.zalas@gmail.com')]
+ADMINS = [('Yoel', 'yoel.zalas@gmail.com')]
 
 # Application definition
 
