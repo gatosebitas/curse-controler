@@ -24,6 +24,7 @@ SECRET_KEY = '%c819#e6!ihczdh)#$uz7oofgd2*z@o%n7^zsz(4)cetcd+bt9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DEV_MODE = True
 
 ALLOWED_HOSTS = ['*']
 # ADMINS = [('Yoel', 'yoel.zalas@gmail.com')]
@@ -73,7 +74,7 @@ WSGI_APPLICATION = 'sociallogin.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-if not DEBUG or True:
+if not DEV_MODE:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',

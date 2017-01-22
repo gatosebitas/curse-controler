@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Facebook Login JavaScript Example</title>
+  <title>Úsala Ya!</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+  <link rel="shortcut icon" type="image/png" href="{% static 'main/key.png' %}"/>
 </head>
 <body>
 <script>
@@ -87,10 +88,12 @@
       {% elif not session %}
         <h2>Está libre!</h2>
       {% endif %}
+      {% if not user.using_account %}
         <br>
         <button id="update-btn" class="btn" onclick="window.location.reload();">
           Actualizar
         </button>
+      {% endif %}
       {% if user.using_account %}
         <button id="end-session-btn" class="btn">
           Dejar de usar
@@ -99,15 +102,15 @@
     </div>
   </section>
   <section style="text-align: left;">
-    <P><strong>POR QUE?</strong> Aveces es incomodo pedir permiso cada que vas a usar la plataforma de Platzi, asi que antes de preguntar ingresa aqui y ve si alguien esta usando la cuenta.</P>
+    <P><strong>POR QUÉ?</strong> Aveces es incomodo pedir permiso cada que vas a usar la plataforma de Platzi. La idea es que si "Está libre!", la puedes usar inmediatamente.</P>
 
     Ventajas:
     <ul>
       <li>Se tiene claro a que hora podras usar a la plataforma</li>
       <li>Evita el spam del chat de facebook</li>
-      <li>Las sesiones terminan automaticamente pasado el tiempo que se ingreso</li>
+      <li>Para los que se olvidan de avisar que ya no estan usando la cuenta, Las sesiones terminan pasado el tiempo que dijiste que la usarias</li>
     </ul>
-    <p><strong>NOTA IMPORTANTE:</strong> La sesion se hace por facebook pero solo se usa sus nombres e email, asi que no se preocupen ;) <br>para los devs del team, si desean mejorar esto les dejo el repo: <a href="https://github.com/MackYoel/curse-controler">codigo fuente</a></p>
+    <p><strong>NOTA IMPORTANTE:</strong> La sesion se hace por facebook pero solo se usa su email y nombres asi que no se preocupen ;) <br>para los devs del team, les dejo el repo del <a href="https://github.com/MackYoel/curse-controler">codigo fuente</a></p>
   </section>
 </section>
 
