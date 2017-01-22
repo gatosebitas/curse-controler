@@ -38,12 +38,13 @@
 <header>
   <img id="main-picture" class="hide" src="#">
   {% if user.is_authenticated %}
-  <div id="main-username" class="">{{user}}</div>
+  <div class="inline-block"><img style="border-radius: 50%" src="{{user.picture}}"></div>
+  <div class="inline-block" id="main-username">{{user}}</div>
   {% endif %}
   <div class="fb-login-button" scope="email" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" onlogin="onLoggedIn();"></div>
   {% if not user.is_authenticated %}
     <div id="no-session-message">
-      Inice Sesion si desea usar la cuenta
+      Inice sesión si desea usar la cuenta
     </div>
   {% endif %}
 </header>
@@ -53,7 +54,7 @@
   {% for u in users %}
     <div class="user {% if not user.using_account and u.using_account %}warn{% elif user.using_account and u.using_account %}own{% endif %}">
       <div class="inline-block">
-        <img src="{{u.picture}}">
+        <img style="border-radius: 50%" src="{{u.picture}}">
       </div>
       <div class="inline-block name-block">
       <label class="username">{{u.first_name}}</label><br>
@@ -79,7 +80,7 @@
       {% if user.is_authenticated %}
         <form method="POST" id="main-form" name="main-form" class="{% if session %}hide{% endif %}">
           <h2>Está libre!</h2>
-          Cuantos minutos usaras la cuenta? <br><br><input type="number" name="session-time" id="session-time" value="10" required>Minutos
+          Cuantos minutos usarás la cuenta? <br><br><input type="number" name="session-time" id="session-time" value="10" required>Minutos
           <br><br>
           <button type="submit" id="use-account-btn" class="btn">
             Usar
@@ -110,7 +111,7 @@
       <li>Evita el spam del chat de facebook</li>
       <li>Para los que se olvidan de avisar que ya no estan usando la cuenta, Las sesiones terminan pasado el tiempo que dijiste que la usarias</li>
     </ul>
-    <p><strong>NOTA IMPORTANTE:</strong> La sesion se hace por facebook pero solo se usa su email y nombres asi que no se preocupen ;) <br>para los devs del team, les dejo el repo del <a href="https://github.com/MackYoel/curse-controler">codigo fuente</a></p>
+    <p><strong>NOTA IMPORTANTE:</strong> La sesión se hace por facebook pero solo se usa su email y nombres asi que no se preocupen ;) <br>para los devs del team, les dejo el repo del <a href="https://github.com/MackYoel/curse-controler">codigo fuente</a></p>
   </section>
 </section>
 

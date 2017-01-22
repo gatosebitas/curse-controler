@@ -17,6 +17,9 @@ def home(req):
     else:
         session = None
 
+    if req.user.is_authenticated():
+        Person.set_picture(req.user)
+
     return render(req, 'main/home.html', locals())
 
 

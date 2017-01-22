@@ -27,6 +27,11 @@ class Person(User):
                 raise Http404
             return None
 
+    @classmethod
+    def set_picture(cls, user):
+        person = cls.get_by_email(user.email)
+        user.picture = None if not person else person.picture
+
 
 class SessionAccount(models.Model):
     start_at = models.DateTimeField(auto_now_add=True)
