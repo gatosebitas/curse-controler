@@ -61,7 +61,7 @@
       {% if u.using_account %}
         <label class="username"><strong>usando...</strong></label><br>
       {% endif %}
-      <label>Último uso: {{u.last_session|date:"d/m/y h:i a"|default:"---"}}</label>
+      <label class="italic">Último uso: {{u.last_session|date:"d/m/y h:i a"|default:"---"}}</label>
       </div>
     </div>
   {% endfor %}

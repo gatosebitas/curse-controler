@@ -2,6 +2,7 @@ body{
     font-family: "Arial Black", Gadget, sans-serif;
     margin: 0;
     padding: 0;
+    color: #222;
 }
 header{
     background: #006064;
@@ -23,9 +24,13 @@ header div{
     /*overflow-y: None;*/
 }
 .user{
+    border-bottom: 1px solid #ddd;
     height: 65px;
     padding: 0;
     margin: 0;
+}
+.users .user:first-of-type{
+    border-top: 1px solid #ddd;
 }
 .user label{
     padding-left: 1em;
@@ -103,4 +108,8 @@ header div{
   background-color: #01579B !important;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
+}
+.italic{
+  font-style: italic;
+  font-size: 13px;
 }
