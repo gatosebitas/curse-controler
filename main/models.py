@@ -32,8 +32,17 @@ class Person(User):
         person = cls.get_by_email(user.email)
         user.picture = None if not person else person.picture
 
+    @property
+    def last_session(self):
+        try:
+            return SessionAccount.objects.filter(person=self).latest('id').start_at
+        except SessionAccount.DoesNotExist:
+            return None
+
 
 class SessionAccount(models.Model):
+    UTC_DIFFERENCE = 18000  # seconds
+
     start_at = models.DateTimeField(auto_now_add=True)
     session_time = models.IntegerField()  # in minutes
     person = models.ForeignKey(Person)
@@ -51,7 +60,7 @@ class SessionAccount(models.Model):
 
     @property
     def remaining(self):
-        return time.mktime(self.expire_at.timetuple()) - time.mktime(datetime.datetime.now().timetuple())
+        return time.mktime(self.expire_at.timetuple()) - time.mktime(datetime.datetime.now().timetuple()) - self.UTC_DIFFERENCE
 
     @property
     def expire_at_seconds(self):

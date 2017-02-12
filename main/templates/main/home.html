@@ -54,11 +54,14 @@
   {% for u in users %}
     <div class="user {% if not user.using_account and u.using_account %}warn{% elif user.using_account and u.using_account %}own{% endif %}">
       <div class="inline-block">
-        <img style="border-radius: 50%" src="{{u.picture}}">
+        <img style="border-radius: 50%; padding-top: 6px" src="{{u.picture}}">
       </div>
       <div class="inline-block name-block">
       <label class="username">{{u.first_name}}</label><br>
-      <label class="username"><strong>{% if u.using_account %}usando...{% endif %}</strong></label>
+      {% if u.using_account %}
+        <label class="username"><strong>usando...</strong></label><br>
+      {% endif %}
+      <label>Último uso: {{u.last_session|date:"d/m/y h:i a"|default:"---"}}</label>
       </div>
     </div>
   {% endfor %}
@@ -74,13 +77,14 @@
         {% else %}
           La cuenta esta siendo usada 
         {% endif %}
-        hasta la(s) <strong id="to_hour"></strong>
+        hasta la(s)<br>
+        <h3>{{session.expire_at|date:"h:i a"}}</h3>
       </p>
 
       {% if user.is_authenticated %}
         <form method="POST" id="main-form" name="main-form" class="{% if session %}hide{% endif %}">
           <h2>Está libre!</h2>
-          Cuantos minutos usarás la cuenta? <br><br><input type="number" name="session-time" id="session-time" value="10" required>Minutos
+          Cuantos minutos usarás la cuenta? <br><br><input type="number" name="session-time" id="session-time" value="10" required> Minutos
           <br><br>
           <button type="submit" id="use-account-btn" class="btn">
             Usar
@@ -128,9 +132,6 @@
 <script>
   {% if session %}
       var remaining = {{session.remaining}};
-      var t = new Date();
-      t.setSeconds(t.getSeconds() + remaining);
-      $('#to_hour').html(t.toLocaleTimeString());
       trackRemaining(remaining);
   {% endif %}
 </script>

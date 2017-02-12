@@ -4,7 +4,7 @@ body{
     padding: 0;
 }
 header{
-    background: #111;
+    background: #006064;
     padding: 1em;
     color: #ddd;
     font-size: 14px;
@@ -23,7 +23,7 @@ header div{
     /*overflow-y: None;*/
 }
 .user{
-    height: 50px;
+    height: 65px;
     padding: 0;
     margin: 0;
 }
@@ -54,15 +54,15 @@ header div{
 }
 .warn{
     color: #fff;
-    background: #EF6C00;
+    background: #9E9E9E;
 }
 .ok{
     color: #fff;
-    background: #388E3C;   
+    background: #26A69A;   
 }
 .own{
     color: #fff;
-    background: #00BCD4;
+    background: #4DB6AC;   
 }
 .using-msg{
     padding: 1em 0;
@@ -89,17 +89,18 @@ header div{
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color: #4CAF50;
-  background-color: #0288D1;
+  background-color: #00796B;
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #999;
 }
 
-.btn:hover {background-color: #01579B}
+.btn:hover {
+  background-color: #01579B !important;
+}
 
 .btn:active {
-  background-color: #01579B;
+  background-color: #01579B !important;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }

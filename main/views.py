@@ -4,6 +4,7 @@ from .models import Person, SessionAccount
 from django.contrib.auth import login, logout
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from main.utils import sort_by_last_session
 
 
 def home(req):
@@ -19,6 +20,8 @@ def home(req):
 
     if req.user.is_authenticated():
         Person.set_picture(req.user)
+
+    users = sorted(users, key=sort_by_last_session, reverse=True)
 
     return render(req, 'main/home.html', locals())
 
